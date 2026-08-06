@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
   <meta name="robots" content="noindex, nofollow, noarchive">
-  <title>Emmanuel College AI Tool Directory — Creative Prototype</title>
+  <title>AI Tool Approval Directory | Emmanuel College</title>
   <style>
     :root {
       --navy: #193c64;
@@ -471,6 +471,16 @@
       border-bottom: 1px solid #cde8f8;
     }
 
+    .feature-band.directory-request-band {
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+    }
+
+    .inline-review-request {
+      min-width: 220px;
+      align-self: center;
+    }
+
     .feature-icon {
       display: grid;
       width: 42px;
@@ -772,20 +782,6 @@
       font-weight: 400;
     }
 
-    .page-footer {
-      margin-top: 28px;
-      padding: 18px 22px;
-      color: #4e6278;
-      background: rgba(255, 255, 255, 0.76);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-md);
-      font-size: 0.88rem;
-    }
-
-    .page-footer strong {
-      color: var(--navy);
-    }
-
     :focus-visible {
       outline: 3px solid var(--gold);
       outline-offset: 3px;
@@ -931,6 +927,15 @@
         padding: 22px 24px;
       }
 
+      .feature-band.directory-request-band {
+        grid-template-columns: 1fr;
+      }
+
+      .inline-review-request {
+        width: 100%;
+        min-width: 0;
+      }
+
       .key-guidance {
         grid-template-columns: 1fr;
         gap: 6px;
@@ -1045,9 +1050,6 @@
         min-height: 0;
       }
 
-      .page-footer {
-        background: #fff;
-      }
     }
   </style>
 </head>
@@ -1056,9 +1058,9 @@
 
   <header class="site-header">
     <div class="header-inner">
-      <p class="eyebrow">Emmanuel College · Staff guidance</p>
-      <h1>Know what you can do before you use the tool.</h1>
-      <p class="lede">A clear, scoped decision for each AI service. Scan the essentials first, then open an entry when you need the full uses, restrictions, conditions and reasons.</p>
+      <p class="eyebrow">Emmanuel College · Staff directory</p>
+      <h1>AI Tool Approval Directory</h1>
+      <p class="lede">Check whether an AI tool is permitted, permitted with conditions or not permitted—and what staff need to know before using it or recommending it to students.</p>
     </div>
   </header>
 
@@ -1296,9 +1298,6 @@
       </div>
     </section>
 
-    <footer class="page-footer">
-      <strong>Directory prototype:</strong> approval applies to the exact service, account configuration, user group and use described—not automatically to every product carrying the same brand name.
-    </footer>
   </main>
 
   <script>
@@ -1868,7 +1867,7 @@
               </div>`}
             </div>
 
-            <div class="feature-band">
+            <div class="feature-band${isDirectoryRule ? " directory-request-band" : ""}">
               <span class="feature-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                   <path d="M5 4h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-1-1.73V6a2 2 0 0 1 2-2Z"></path>
@@ -1879,6 +1878,13 @@
                 <h3>${isDirectoryRule ? "What this means" : "What it does"}</h3>
                 <p>${escapeHtml(tool.features)}</p>
               </div>
+              ${isDirectoryRule ? `<a class="review-request inline-review-request" href="${escapeHtml(REVIEW_REQUEST_URL)}" target="_blank" rel="noopener noreferrer">
+                <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 20h9"></path>
+                  <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z"></path>
+                </svg>
+                <span>Request a tool review</span>
+              </a>` : ""}
             </div>
 
             <div class="guidance-grid">

@@ -245,7 +245,6 @@
 
     .review-request-wrap {
       display: grid;
-      gap: 5px;
       align-self: stretch;
     }
 
@@ -284,14 +283,6 @@
       background: #eef2f5;
       border-color: var(--line);
       cursor: not-allowed;
-    }
-
-    .review-request-note {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.74rem;
-      line-height: 1.3;
-      text-align: center;
     }
 
     .directory {
@@ -1093,7 +1084,6 @@
           </svg>
           <span>Request a tool review</span>
         </a>
-        <p class="review-request-note" id="review-request-note">Review form link coming soon</p>
       </div>
     </section>
 
@@ -1317,7 +1307,6 @@
       const REVIEW_REQUEST_URL = "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=_5fQAKHxzk6AXLZWX8WWLWieIO9CZ2lNgdRsAw_wOpxUNjNVQjNFUFg1QlFSVlc2VlBPUVNUWlZZOC4u";
 
       const reviewRequestLink = document.querySelector("#review-request-link");
-      const reviewRequestNote = document.querySelector("#review-request-note");
 
       if (REVIEW_REQUEST_URL) {
         reviewRequestLink.href = REVIEW_REQUEST_URL;
@@ -1325,7 +1314,6 @@
         reviewRequestLink.rel = "noopener noreferrer";
         reviewRequestLink.removeAttribute("aria-disabled");
         reviewRequestLink.removeAttribute("tabindex");
-        reviewRequestNote.textContent = "Opens the College review request form";
       }
 
       const additionalTools = [

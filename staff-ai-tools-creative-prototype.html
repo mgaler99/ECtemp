@@ -152,7 +152,7 @@
       position: relative;
       z-index: 2;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-columns: minmax(0, 1fr) auto minmax(210px, auto);
       gap: 20px;
       align-items: end;
       padding: 22px;
@@ -240,6 +240,57 @@
       border: 1px solid var(--line);
       border-radius: 12px;
       font-size: 0.92rem;
+      text-align: center;
+    }
+
+    .review-request-wrap {
+      display: grid;
+      gap: 5px;
+      align-self: stretch;
+    }
+
+    .review-request {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 52px;
+      padding: 11px 17px;
+      color: #fff;
+      background: var(--navy);
+      border: 2px solid var(--navy);
+      border-radius: 12px;
+      font-weight: 800;
+      line-height: 1.2;
+      text-align: center;
+      text-decoration: none;
+      transition: background 150ms ease, border-color 150ms ease, transform 150ms ease;
+    }
+
+    .review-request svg {
+      flex: 0 0 auto;
+      width: 19px;
+      height: 19px;
+    }
+
+    .review-request[href]:hover {
+      background: var(--navy-deep);
+      border-color: var(--navy-deep);
+      transform: translateY(-1px);
+    }
+
+    .review-request[aria-disabled="true"] {
+      color: var(--muted);
+      background: #eef2f5;
+      border-color: var(--line);
+      cursor: not-allowed;
+    }
+
+    .review-request-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.74rem;
+      line-height: 1.3;
       text-align: center;
     }
 
@@ -459,6 +510,110 @@
       color: #314964;
     }
 
+    .key-guidance {
+      display: grid;
+      grid-template-columns: 132px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+      padding: 18px 40px;
+      background: #fff;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .key-guidance .micro-label {
+      margin: 3px 0 0;
+      color: var(--navy);
+    }
+
+    .key-guidance p:last-child {
+      margin: 0;
+      color: #314964;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .tool-details {
+      background: #fff;
+    }
+
+    .tool-details summary {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: center;
+      min-height: 62px;
+      padding: 14px 40px;
+      color: var(--navy);
+      background: #f7fafc;
+      cursor: pointer;
+      list-style: none;
+      transition: background 150ms ease, color 150ms ease;
+    }
+
+    .tool-details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .tool-details summary:hover {
+      background: var(--blue-soft);
+    }
+
+    .tool-details summary:focus-visible {
+      position: relative;
+      z-index: 1;
+      outline-offset: -4px;
+    }
+
+    .details-label {
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .details-description {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .details-icon {
+      position: relative;
+      width: 30px;
+      height: 30px;
+      border: 1px solid #b9cad8;
+      border-radius: 50%;
+    }
+
+    .details-icon::before,
+    .details-icon::after {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 12px;
+      height: 2px;
+      content: "";
+      background: currentColor;
+      border-radius: 2px;
+      transform: translate(-50%, -50%);
+    }
+
+    .details-icon::after {
+      transform: translate(-50%, -50%) rotate(90deg);
+      transition: transform 150ms ease;
+    }
+
+    .tool-details[open] summary {
+      color: var(--navy-deep);
+      background: var(--blue-soft);
+      border-bottom: 1px solid #cde8f8;
+    }
+
+    .tool-details[open] .details-icon::after {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    .detail-content {
+      background: #fff;
+    }
+
     .guidance-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -650,6 +805,14 @@
         padding-bottom: 98px;
       }
 
+      .utility-panel {
+        grid-template-columns: minmax(0, 1fr) auto;
+      }
+
+      .review-request-wrap {
+        grid-column: 1 / -1;
+      }
+
       .decision-bar {
         grid-template-columns: 1fr 0.48fr;
       }
@@ -724,6 +887,10 @@
         padding: 16px;
       }
 
+      .review-request-wrap {
+        grid-column: auto;
+      }
+
       .result-meta {
         min-width: 0;
         text-align: left;
@@ -771,6 +938,25 @@
       .feature-band {
         grid-template-columns: 1fr;
         padding: 22px 24px;
+      }
+
+      .key-guidance {
+        grid-template-columns: 1fr;
+        gap: 6px;
+        padding: 18px 24px;
+      }
+
+      .key-guidance .micro-label {
+        margin-top: 0;
+      }
+
+      .tool-details summary {
+        grid-template-columns: minmax(0, 1fr) auto;
+        padding: 15px 24px;
+      }
+
+      .details-description {
+        display: none;
       }
 
       .guidance-grid {
@@ -856,6 +1042,14 @@
         break-inside: avoid;
       }
 
+      .tool-details summary {
+        display: none;
+      }
+
+      .tool-details:not([open]) > .detail-content {
+        display: block;
+      }
+
       .guidance-group {
         min-height: 0;
       }
@@ -873,7 +1067,7 @@
     <div class="header-inner">
       <p class="eyebrow">Emmanuel College · Staff guidance</p>
       <h1>Know what you can do before you use the tool.</h1>
-      <p class="lede">A clear, scoped decision for each AI service. Every permitted use, restriction, required condition and reason is visible in the main entry.</p>
+      <p class="lede">A clear, scoped decision for each AI service. Scan the essentials first, then open an entry when you need the full uses, restrictions, conditions and reasons.</p>
     </div>
   </header>
 
@@ -890,11 +1084,21 @@
           <button class="clear-search" type="button" aria-label="Clear search">×</button>
         </div>
       </div>
-      <div class="result-meta" role="status" aria-live="polite"><strong id="result-count">14</strong> <span id="result-label">tools shown</span></div>
+      <div class="result-meta" role="status" aria-live="polite"><strong id="result-count">16</strong> <span id="result-label">tools shown</span></div>
+      <div class="review-request-wrap">
+        <a class="review-request" id="review-request-link" aria-disabled="true" tabindex="-1">
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 20h9"></path>
+            <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L8 18l-4 1 1-4Z"></path>
+          </svg>
+          <span>Request a tool review</span>
+        </a>
+        <p class="review-request-note" id="review-request-note">Review form link coming soon</p>
+      </div>
     </section>
 
     <section class="directory" aria-label="AI tool approval directory">
-      <article class="tool-record" data-search="chatgpt openai personal free plus pro consumer staff only 13 age guardian brainstorming drafting summarising research teacher operated">
+      <article class="tool-record" data-search="chatgpt openai personal free plus pro consumer staff only 13 age guardian brainstorming drafting summarising research teacher operated" data-key-condition="Staff use only. Use public or generic information, turn off model training and verify every output before sharing it.">
         <div class="decision-bar">
           <div class="tool-identity">
             <p class="micro-label">Tool and account type</p>
@@ -995,7 +1199,7 @@
         <p class="scope-note"><strong>Scope matters:</strong> this decision applies to personal Free, Plus and Pro accounts. A College-contracted or managed ChatGPT service would require a separate assessment.</p>
       </article>
 
-      <article class="tool-record" data-search="claude anthropic personal college email free pro max consumer staff only 18 age drafting critique document analysis coding structured reasoning">
+      <article class="tool-record" data-search="claude anthropic personal college email free pro max consumer staff only 18 age drafting critique document analysis coding structured reasoning" data-key-condition="Staff use only. Use de-identified material, turn off model improvement and independently verify every output.">
         <div class="decision-bar">
           <div class="tool-identity">
             <p class="micro-label">Tool and account type</p>
@@ -1098,7 +1302,7 @@
 
       <div class="no-results" id="no-results">
         <h2>No matching tool</h2>
-        <p>Check the spelling or submit the tool for review if it is not listed.</p>
+        <p>Check the spelling. If the tool is not listed, use “Request a tool review” above.</p>
       </div>
     </section>
 
@@ -1109,6 +1313,21 @@
 
   <script>
     (() => {
+      // Add the review form address between the quotation marks when it is ready.
+      const REVIEW_REQUEST_URL = "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=_5fQAKHxzk6AXLZWX8WWLWieIO9CZ2lNgdRsAw_wOpxUNjNVQjNFUFg1QlFSVlc2VlBPUVNUWlZZOC4u";
+
+      const reviewRequestLink = document.querySelector("#review-request-link");
+      const reviewRequestNote = document.querySelector("#review-request-note");
+
+      if (REVIEW_REQUEST_URL) {
+        reviewRequestLink.href = REVIEW_REQUEST_URL;
+        reviewRequestLink.target = "_blank";
+        reviewRequestLink.rel = "noopener noreferrer";
+        reviewRequestLink.removeAttribute("aria-disabled");
+        reviewRequestLink.removeAttribute("tabindex");
+        reviewRequestNote.textContent = "Opens the College review request form";
+      }
+
       const additionalTools = [
         {
           id: "diffit",
@@ -1179,6 +1398,82 @@
           accountScope: "Emmanuel Microsoft Entra account with enterprise data protection",
           ageRule: "13+ for direct student use; Years 5–12 College scope",
           scopeNote: "This decision applies only to signed-in Emmanuel accounts with enterprise data protection. Personal Microsoft Copilot use is a different configuration."
+        },
+        {
+          id: "google-search-ai",
+          title: "Google Search AI features",
+          accountType: "Public Google Search · AI Overviews and AI Mode · text queries",
+          approval: "Use with conditions",
+          approvalClass: "conditions",
+          studentTone: "conditional",
+          studentAnswer: "Yes — Years 5–12 under teacher direction; P–4 is teacher-mediated.",
+          ageValue: "No sign-in",
+          ageNote: "For standard text-based use",
+          features: "AI-assisted Google Search through AI Overviews and AI Mode, including generated summaries, linked web sources, topic exploration and follow-up questions.",
+          suitable: [
+            "Teacher-directed research using public, general or fully de-identified questions.",
+            "Developing keywords, gaining an initial overview and identifying possible sources.",
+            "Comparing the generated response with original webpages and conventional search results."
+          ],
+          avoid: [
+            "Entering names, personal information, sensitive College information or confidential material.",
+            "Uploading images, PDFs, student work or other files under this approval.",
+            "Treating an AI answer, summary or source list as verified research or citing it as the original source."
+          ],
+          conditions: [
+            "Students use the standard text-based experience without signing in.",
+            "Open and evaluate the linked webpages, and verify important claims through authoritative sources.",
+            "Cite the original source rather than the AI-generated response; use the Web filter when a task requires conventional results."
+          ],
+          reasons: [
+            "AI Overviews and the standard Australian rollout of AI Mode are part of Google Search and can be accessed without a separate AI account.",
+            "Generated responses can be inaccurate, omit context or misrepresent the sources they summarise.",
+            "Google states that interactions with generative-AI Search experiences may be used to evaluate and improve its systems."
+          ],
+          accountScope: "Unsigned public Google Search; AI Overviews and standard AI Mode; text queries only",
+          ageRule: "No separate account or sign-in required for the approved text-based use",
+          reviewed: "6 August 2026",
+          scopeNote: "This decision does not cover signed-in history or personalisation, Personal Intelligence, file or image uploads, Search Labs experiments, the Gemini app or other Google AI products. Those configurations require separate consideration."
+        },
+        {
+          id: "google-gemini-consumer",
+          title: "Google Gemini",
+          accountType: "Consumer Gemini Apps · signed-out or personal Google account · adult staff",
+          approval: "Staff only",
+          approvalClass: "staff",
+          studentTone: "blocked",
+          studentAnswer: "No — direct consumer Gemini use has not been approved for students.",
+          ageValue: "13+*",
+          ageNote: "*Provider minimum; College scope is adult staff only",
+          features: "General-purpose generative AI for research, web-grounded questions, brainstorming, drafting, summarising, coding and content generation. Some web features can be used without signing in.",
+          suitable: [
+            "Adult staff planning, brainstorming and drafting with public, generic or fully de-identified information.",
+            "Developing questions, examples or alternative explanations for professional review.",
+            "Teacher-led demonstrations using checked prompts and outputs, without student accounts or student information."
+          ],
+          avoid: [
+            "Directing students to use Gemini Apps or create personal Google accounts for College work.",
+            "Entering names, student work, results, correspondence, sensitive information or confidential College material.",
+            "Uploading files or images, connecting Google apps, or enabling personalisation under this approval.",
+            "Treating generated responses, quotations or citations as authoritative without checking the original sources."
+          ],
+          conditions: [
+            "Use signed-out access where it provides the required feature, or turn off Keep Activity and use Temporary Chat when signed in.",
+            "Use only public, generic, invented or fully de-identified material.",
+            "Open and check cited sources, and independently verify accuracy, currency, copyright and suitability before use."
+          ],
+          reasons: [
+            "Google permits personal and eligible school-account access from age 13 in Australia, but provider eligibility is not the same as College approval.",
+            "With Keep Activity on, chats and shared content may be used to improve Google services and train generative-AI models with the help of human reviewers.",
+            "With Keep Activity off, future chats are not used for model training unless feedback is submitted, but they are still retained for up to 72 hours.",
+            "When used signed out, Google may still collect usage, technical and safety data, although it is not associated with a specific Google Account.",
+            "A Google account created with an Emmanuel email address remains a consumer account unless it is part of a separately administered Google Workspace environment."
+          ],
+          keyCondition: "Adult staff only. Use signed out or turn off Keep Activity, enter no personal information and independently check every output.",
+          accountScope: "Consumer Gemini web experience used by adult staff; signed-out access or a personal Google account with Keep Activity off",
+          ageRule: "Provider minimum is 13+ for personal or eligible school accounts in Australia; Emmanuel scope remains adult staff only",
+          reviewed: "6 August 2026",
+          scopeNote: "Using an Emmanuel email address to create a personal Google account does not make it College-managed. This decision excludes student use, connected apps, uploads, personalisation, Google Workspace for Education and any contracted enterprise configuration; each would require a separate assessment."
         },
         {
           id: "canva-education",
@@ -1323,21 +1618,21 @@
         {
           id: "perplexity",
           title: "Perplexity Free or Pro",
-          accountType: "Consumer account · adult staff · AI data retention disabled",
+          accountType: "Consumer Free or Pro · current decision covers adult staff",
           approval: "Staff only",
           approvalClass: "staff",
           studentTone: "blocked",
-          studentAnswer: "No — consumer use by minors requires guardian acceptance.",
+          studentAnswer: "Not yet — a supervised Years 9–12 pathway is being reviewed.",
           ageValue: "13+",
-          ageNote: "Guardian accepts terms for minors",
+          ageNote: "Under 18: parent or guardian consent",
           features: "AI-assisted web and academic search with cited answers, source links, summaries and conversational follow-up.",
           suitable: [
             "Staff research using public, generic or fully de-identified queries.",
             "Generating possible search directions or source leads.",
-            "Teacher demonstrations in which every cited source is opened and checked."
+            "Teacher-led demonstrations in which every cited source is opened and checked."
           ],
           avoid: [
-            "Directing students to use personal Perplexity accounts.",
+            "Student accounts or students using Perplexity directly under the current decision.",
             "Uploading student work or entering names, results or internal information.",
             "Treating the generated answer or citation list as verified research."
           ],
@@ -1347,13 +1642,15 @@
             "Cross-check important claims through authoritative sources or library databases."
           ],
           reasons: [
-            "Consumer terms require guardian acceptance for users who are minors.",
-            "Consumer query data may be retained for AI improvement until the user opts out.",
-            "Visible citations improve traceability but can still be wrong or poorly matched."
+            "Children under 13 cannot use the service; users aged 13–17 require parent or guardian consent.",
+            "Consumer AI data retention is enabled by default and cannot currently be controlled centrally by the College.",
+            "The College has not yet completed a controlled student pilot or approved the required consent and alternative-activity process.",
+            "Visible citations improve traceability but students still need explicit instruction in source verification."
           ],
           accountScope: "Free or Pro consumer account used by adult staff with AI data retention disabled",
-          ageRule: "13+; parent or guardian must accept the terms for a minor",
-          scopeNote: "The decision covers consumer Free or Pro accounts used by adult staff. A contracted school configuration would require separate review."
+          ageRule: "13+; users aged 13–17 require parent or guardian consent",
+          reviewed: "3 August 2026",
+          scopeNote: "Student use has not been rejected in principle. A Years 9–12 pilot may move to Use with conditions after the College approves consent, privacy instructions, an alternative activity, staff guidance and a monitored pilot. Education Pro or an enterprise configuration would require its own scoped review."
         },
         {
           id: "scispace",
@@ -1539,6 +1836,11 @@
 
       const renderTool = (tool) => {
         const isDirectoryRule = Boolean(tool.directoryRule);
+        const keyCondition = tool.keyCondition || (tool.approval === "Not permitted"
+          ? (isDirectoryRule
+            ? "Do not use an unlisted AI tool. Submit it for review and wait for a published decision."
+            : "Do not use this tool for College work in the assessed configuration. It must be reviewed again before use.")
+          : tool.conditions[0]);
         const searchTerms = [
           tool.title,
           tool.accountType,
@@ -1554,7 +1856,7 @@
         ].join(" ");
 
         return `
-          <article class="tool-record" data-search="${escapeHtml(searchTerms)}">
+          <article class="tool-record" data-search="${escapeHtml(searchTerms)}" data-key-condition="${escapeHtml(keyCondition)}">
             <div class="decision-bar${isDirectoryRule ? " directory-rule" : ""}">
               <div class="tool-identity">
                 <p class="micro-label">${isDirectoryRule ? "Directory rule" : "Tool and account type"}</p>
@@ -1628,7 +1930,7 @@
               </div>`}
               <div class="fact">
                 <dt>Reviewed</dt>
-                <dd>29 July 2026</dd>
+                <dd>${escapeHtml(tool.reviewed || "29 July 2026")}</dd>
               </div>
             </dl>
 
@@ -1639,6 +1941,58 @@
 
       const insertionPoint = document.querySelector("#no-results");
       insertionPoint.insertAdjacentHTML("beforebegin", additionalTools.map(renderTool).join(""));
+
+      const directChild = (record, selector) => Array.from(record.children)
+        .find((child) => child.matches(selector));
+
+      document.querySelectorAll(".tool-record").forEach((record) => {
+        const guidance = directChild(record, ".guidance-grid");
+        const footer = directChild(record, ".record-footer");
+        const scopeNote = directChild(record, ".scope-note");
+        const featureBand = directChild(record, ".feature-band");
+        const toolName = record.querySelector(".tool-identity h2")?.textContent.trim() || "this tool";
+
+        if (!guidance || !footer || !scopeNote || !featureBand) return;
+
+        const keyGuidance = document.createElement("div");
+        keyGuidance.className = "key-guidance";
+
+        const keyLabel = document.createElement("p");
+        keyLabel.className = "micro-label";
+        keyLabel.textContent = "Key condition";
+
+        const keyText = document.createElement("p");
+        keyText.textContent = record.dataset.keyCondition || "Read the conditions before using this tool.";
+        keyGuidance.append(keyLabel, keyText);
+
+        const details = document.createElement("details");
+        details.className = "tool-details";
+
+        const summary = document.createElement("summary");
+        summary.setAttribute("aria-label", `Find out more about ${toolName}`);
+
+        const summaryLabel = document.createElement("span");
+        summaryLabel.className = "details-label";
+        summaryLabel.textContent = "Find out more";
+
+        const summaryDescription = document.createElement("span");
+        summaryDescription.className = "details-description";
+        summaryDescription.textContent = "Suitable uses, restrictions, full conditions and reasons";
+
+        const summaryIcon = document.createElement("span");
+        summaryIcon.className = "details-icon";
+        summaryIcon.setAttribute("aria-hidden", "true");
+
+        summary.append(summaryLabel, summaryDescription, summaryIcon);
+
+        const detailContent = document.createElement("div");
+        detailContent.className = "detail-content";
+
+        record.insertBefore(keyGuidance, guidance);
+        record.insertBefore(details, guidance);
+        details.append(summary, detailContent);
+        detailContent.append(guidance, footer, scopeNote);
+      });
 
       const search = document.querySelector("#tool-search");
       const clear = document.querySelector(".clear-search");

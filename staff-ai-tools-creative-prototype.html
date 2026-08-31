@@ -124,14 +124,18 @@
     }
 
     h1 {
-      max-width: 850px;
+      max-width: 1180px;
       margin: 0;
       font-family: Georgia, "Times New Roman", serif;
-      font-size: clamp(2.65rem, 6vw, 5.15rem);
+      font-size: clamp(2.55rem, 5.25vw, 4.7rem);
       font-weight: 400;
       line-height: 0.98;
       letter-spacing: -0.045em;
       text-wrap: balance;
+    }
+
+    .heading-lock {
+      white-space: nowrap;
     }
 
     .lede {
@@ -233,7 +237,12 @@
     }
 
     .result-meta {
+      display: flex;
+      gap: 0.35em;
+      min-height: 52px;
       min-width: 170px;
+      align-items: center;
+      justify-content: center;
       padding: 11px 14px;
       color: var(--muted);
       background: var(--canvas);
@@ -241,11 +250,12 @@
       border-radius: 12px;
       font-size: 0.92rem;
       text-align: center;
+      white-space: nowrap;
     }
 
     .review-request-wrap {
       display: grid;
-      align-self: stretch;
+      align-self: end;
     }
 
     .review-request {
@@ -285,6 +295,37 @@
       cursor: not-allowed;
     }
 
+    .permission-key {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr);
+      gap: 18px;
+      align-items: center;
+      margin-top: 18px;
+      padding: 15px 20px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+
+    .permission-key h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: 0.82rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .permission-key p {
+      margin: 0;
+    }
+
+    .permission-key strong {
+      color: var(--ink);
+    }
+
     .directory {
       margin-top: 32px;
     }
@@ -307,13 +348,13 @@
 
     .decision-bar {
       display: grid;
-      grid-template-columns: minmax(260px, 1.2fr) minmax(165px, 0.5fr) minmax(245px, 0.78fr) minmax(170px, 0.48fr);
+      grid-template-columns: minmax(260px, 1.2fr) minmax(190px, 0.58fr) minmax(230px, 0.76fr) minmax(170px, 0.48fr);
       min-height: 190px;
       border-bottom: 1px solid var(--line);
     }
 
     .decision-bar.directory-rule {
-      grid-template-columns: minmax(300px, 1.2fr) minmax(165px, 0.5fr) minmax(420px, 1.26fr);
+      grid-template-columns: minmax(300px, 1.2fr) minmax(190px, 0.58fr) minmax(300px, 0.9fr);
     }
 
     .tool-identity {
@@ -364,70 +405,82 @@
       font-size: 0.96rem;
     }
 
-    .approval-cell {
+    .permission-cell {
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      padding: 28px;
+      padding: 28px 30px;
+    }
+
+    .staff-permission {
+      align-items: center;
       color: #fff;
       background: var(--navy);
       text-align: center;
     }
 
-    .approval-cell.approved {
+    .staff-permission.allowed {
       background: #26775e;
     }
 
-    .approval-cell.conditions {
+    .staff-permission.conditions {
       color: #493600;
       background: var(--gold);
     }
 
-    .approval-cell.not-approved {
+    .staff-permission.not-allowed {
       background: var(--red);
     }
 
-    .approval-value {
-      font-size: clamp(1.3rem, 2.4vw, 1.85rem);
-      font-weight: 800;
-      letter-spacing: -0.025em;
+    .staff-permission .micro-label {
+      color: rgba(255, 255, 255, 0.82);
     }
 
-    .student-cell {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 32px 36px;
+    .staff-permission.conditions .micro-label {
+      color: #6f5200;
+    }
+
+    .permission-value {
+      font-size: clamp(1.2rem, 2vw, 1.65rem);
+      font-weight: 800;
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+      text-wrap: balance;
+    }
+
+    .student-permission {
       background: var(--red-soft);
       border-left: 1px solid #f5c3ca;
     }
 
-    .student-answer {
-      margin: 0;
+    .student-permission .permission-value {
       color: #9b1830;
-      font-size: clamp(1.1rem, 2vw, 1.4rem);
-      font-weight: 800;
-      line-height: 1.25;
-      text-wrap: balance;
     }
 
-    .student-cell.conditional {
+    .student-permission.direct {
       background: var(--gold-soft);
       border-left-color: #efd68a;
     }
 
-    .student-cell.conditional .student-answer {
+    .student-permission.direct .permission-value {
       color: #6f5200;
     }
 
-    .student-cell.mediated {
+    .student-permission.mediated {
       background: var(--blue-soft);
       border-left-color: #c5e3f5;
     }
 
-    .student-cell.mediated .student-answer {
+    .student-permission.mediated .permission-value {
       color: var(--navy);
+    }
+
+    .permission-note {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+      line-height: 1.35;
     }
 
     .age-cell {
@@ -808,11 +861,11 @@
         grid-template-columns: 1fr 0.48fr;
       }
 
-      .decision-bar.directory-rule .student-cell {
+      .decision-bar.directory-rule .student-permission {
         grid-column: 1 / -1;
       }
 
-      .student-cell {
+      .student-permission {
         grid-column: 1;
         border-top: 1px solid #f5c3ca;
         border-left: 0;
@@ -880,6 +933,7 @@
 
       .result-meta {
         min-width: 0;
+        justify-content: flex-start;
         text-align: left;
       }
 
@@ -892,8 +946,7 @@
       }
 
       .tool-identity,
-      .approval-cell,
-      .student-cell,
+      .permission-cell,
       .age-cell {
         min-height: auto;
         padding: 26px 24px;
@@ -904,22 +957,28 @@
         bottom: 24px;
       }
 
-      .approval-cell {
+      .staff-permission {
         align-items: flex-start;
         text-align: left;
       }
 
-      .student-cell,
+      .student-permission,
       .age-cell {
         grid-column: auto;
       }
 
-      .decision-bar.directory-rule .student-cell {
+      .decision-bar.directory-rule .student-permission {
         grid-column: auto;
       }
 
       .age-cell {
         border-left: 0;
+      }
+
+      .permission-key {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 15px 16px;
       }
 
       .feature-band {
@@ -1059,8 +1118,8 @@
   <header class="site-header">
     <div class="header-inner">
       <p class="eyebrow">Emmanuel College · Staff directory</p>
-      <h1>AI Tool Approval Directory</h1>
-      <p class="lede">Check whether an AI tool is permitted, permitted with conditions or not permitted—and what staff need to know before using it or recommending it to students.</p>
+      <h1>AI Tool <span class="heading-lock">Approval Directory</span></h1>
+      <p class="lede">Use this directory to check which AI tools you can use, who can use them and what conditions apply.</p>
     </div>
   </header>
 
@@ -1077,7 +1136,7 @@
           <button class="clear-search" type="button" aria-label="Clear search">×</button>
         </div>
       </div>
-      <div class="result-meta" role="status" aria-live="polite"><strong id="result-count">16</strong> <span id="result-label">tools shown</span></div>
+      <div class="result-meta" role="status" aria-live="polite"><strong id="result-count">17</strong> <span id="result-label">tools shown</span></div>
       <div class="review-request-wrap">
         <a class="review-request" id="review-request-link" aria-disabled="true" tabindex="-1">
           <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1089,8 +1148,14 @@
       </div>
     </section>
 
+    <section class="permission-key" aria-labelledby="permission-key-heading">
+      <h2 id="permission-key-heading">How to read each entry</h2>
+      <p><strong>Staff use</strong> tells you whether staff may use the tool and whether extra conditions apply.</p>
+      <p><strong>Student use</strong> shows whether students may use the tool directly. “Teacher-operated only” means the teacher prompts the tool and checks anything shared with students.</p>
+    </section>
+
     <section class="directory" aria-label="AI tool approval directory">
-      <article class="tool-record" data-search="chatgpt openai personal free plus pro consumer staff only 13 age guardian brainstorming drafting summarising research teacher operated" data-key-condition="Staff use only. Use public or generic information, turn off model training and verify every output before sharing it.">
+      <article class="tool-record" data-search="chatgpt openai personal free plus pro consumer allowed with conditions teacher operated 13 age guardian brainstorming drafting summarising research" data-key-condition="An adult staff member operates the tool. Use public or generic information, turn off model training and verify every output before sharing it.">
         <div class="decision-bar">
           <div class="tool-identity">
             <p class="micro-label">Tool and account type</p>
@@ -1098,13 +1163,14 @@
             <p class="account-type">Personal Free, Plus or Pro accounts</p>
           </div>
 
-          <div class="approval-cell">
-            <div class="approval-value">Staff only</div>
+          <div class="permission-cell staff-permission conditions">
+            <p class="micro-label">Staff use</p>
+            <div class="permission-value">Allowed with conditions</div>
           </div>
 
-          <div class="student-cell">
-            <p class="micro-label">Can students use it directly?</p>
-            <p class="student-answer">No — students do not use this tool directly.</p>
+          <div class="permission-cell student-permission mediated">
+            <p class="micro-label">Student use</p>
+            <div class="permission-value">Teacher-operated only</div>
           </div>
 
           <div class="age-cell">
@@ -1123,7 +1189,7 @@
           </span>
           <div>
             <h3>What it does</h3>
-            <p>Generative AI for brainstorming, drafting, summarising, question generation and—depending on the plan—file or image analysis.</p>
+            <p>Generative AI for brainstorming, drafting, summarising and generating questions. Some plans can also analyse files and images.</p>
           </div>
         </div>
 
@@ -1175,8 +1241,8 @@
 
         <dl class="record-footer">
           <div class="fact">
-            <dt>Account scope</dt>
-            <dd>Consumer Free, Plus or Pro account — not College managed</dd>
+            <dt>Account covered</dt>
+            <dd>Consumer Free, Plus or Pro account. This is not College managed.</dd>
           </div>
           <div class="fact">
             <dt>Age rule</dt>
@@ -1188,10 +1254,10 @@
           </div>
         </dl>
 
-        <p class="scope-note"><strong>Scope matters:</strong> this decision applies to personal Free, Plus and Pro accounts. A College-contracted or managed ChatGPT service would require a separate assessment.</p>
+        <p class="scope-note"><strong>Please note:</strong> this entry applies to personal Free, Plus and Pro accounts. A College-contracted or managed ChatGPT service would need its own review.</p>
       </article>
 
-      <article class="tool-record" data-search="claude anthropic personal college email free pro max consumer staff only 18 age drafting critique document analysis coding structured reasoning" data-key-condition="Staff use only. Use de-identified material, turn off model improvement and independently verify every output.">
+      <article class="tool-record" data-search="claude anthropic personal college email free pro max consumer allowed with conditions teacher operated 18 age drafting critique document analysis coding structured reasoning" data-key-condition="An adult staff member operates the tool. Use de-identified material, turn off model improvement and check every output yourself.">
         <div class="decision-bar">
           <div class="tool-identity">
             <p class="micro-label">Tool and account type</p>
@@ -1199,13 +1265,14 @@
             <p class="account-type">Consumer Free, Pro or Max accounts</p>
           </div>
 
-          <div class="approval-cell">
-            <div class="approval-value">Staff only</div>
+          <div class="permission-cell staff-permission conditions">
+            <p class="micro-label">Staff use</p>
+            <div class="permission-value">Allowed with conditions</div>
           </div>
 
-          <div class="student-cell">
-            <p class="micro-label">Can students use it directly?</p>
-            <p class="student-answer">No — consumer accounts require users to be 18+.</p>
+          <div class="permission-cell student-permission mediated">
+            <p class="micro-label">Student use</p>
+            <div class="permission-value">Teacher-operated only</div>
           </div>
 
           <div class="age-cell">
@@ -1276,8 +1343,8 @@
 
         <dl class="record-footer">
           <div class="fact">
-            <dt>Account scope</dt>
-            <dd>Consumer Free, Pro or Max account — personal or College email address</dd>
+            <dt>Account covered</dt>
+            <dd>Consumer Free, Pro or Max account using a personal or College email address</dd>
           </div>
           <div class="fact">
             <dt>Age rule</dt>
@@ -1289,7 +1356,7 @@
           </div>
         </dl>
 
-        <p class="scope-note"><strong>Scope matters:</strong> using a College email address does not by itself create an enterprise or College-managed account. Claude for Work, Team or Enterprise would require a separate assessment of the contracted configuration.</p>
+        <p class="scope-note"><strong>Please note:</strong> using a College email address does not make the account College managed. Claude for Work, Team or Enterprise would need its own review.</p>
       </article>
 
       <div class="no-results" id="no-results">
@@ -1323,7 +1390,7 @@
           approval: "Permitted",
           approvalClass: "approved",
           studentTone: "mediated",
-          studentAnswer: "Teacher-mediated — students use the resulting resources, not the tool.",
+          studentAnswer: "Teacher-mediated. Students use the resulting resources, not the tool.",
           ageValue: "18+",
           ageNote: "Account holders",
           features: "Adapts source material to different reading levels and generates instructional resources, questions, activities and vocabulary support.",
@@ -1349,7 +1416,46 @@
           ],
           accountScope: "Adult teacher account; public, licensed or teacher-authored material only",
           ageRule: "18+ for account holders",
-          scopeNote: "This decision covers teachers creating resources. It does not permit student accounts, student prompting or the entry of student information."
+          scopeNote: "This entry covers teachers creating resources. Students must not have accounts, prompt the tool or provide personal information."
+        },
+        {
+          id: "chalkie",
+          title: "Chalkie",
+          accountType: "Individual Free, Pro or Max account · adult teachers",
+          approval: "Staff only",
+          approvalClass: "staff",
+          studentTone: "mediated",
+          studentAnswer: "Teacher-mediated. Students may use reviewed resources, not Chalkie itself.",
+          ageValue: "18+",
+          ageNote: "Account holders",
+          features: "Generates editable lessons, lesson sequences, slides, worksheets, classroom activities and rubrics, with Australian Curriculum alignment and export to PowerPoint, Google Slides or PDF.",
+          suitable: [
+            "Planning lessons or units from public, licensed or teacher-authored material.",
+            "Creating draft slides, worksheets, activities and rubrics for teacher review.",
+            "Presenting or distributing completed resources after checking and editing them."
+          ],
+          avoid: [
+            "Creating accounts for students or asking students to use Chalkie directly.",
+            "Entering student names, results, work samples, learning profiles or other personal information.",
+            "Uploading confidential College material or source material you are not authorised to use.",
+            "Using generated content without checking its accuracy, curriculum fit and suitability."
+          ],
+          conditions: [
+            "Use an individual adult teacher account; this entry does not approve a school-wide deployment.",
+            "Use public, generic, invented, licensed or teacher-authored inputs only.",
+            "Review and edit every output for accuracy, bias, reading level, accessibility, copyright and curriculum alignment before students see it.",
+            "Remove any unintended personal or sensitive information before exporting or sharing a resource."
+          ],
+          reasons: [
+            "Chalkie’s terms require users to be at least 18 years old.",
+            "The service is designed for teachers to create materials rather than for direct student interaction.",
+            "Prompts and lesson content are processed by external AI providers, although Chalkie states that identifiers are not sent with that content and that API data is not used for model training.",
+            "User-generated prompts, slides and files may be retained while the account is active, so student or confidential information must not be entered."
+          ],
+          accountScope: "Individual Chalkie Free, Pro or Max account used by an adult staff member",
+          ageRule: "18+ to create an account and use the service",
+          reviewed: "17 August 2026",
+          scopeNote: "This entry covers resources created by teachers. A Chalkie Schools trial, linked staff environment or contracted College account would need its own review."
         },
         {
           id: "microsoft-copilot-chat",
@@ -1358,10 +1464,10 @@
           approval: "Use with conditions",
           approvalClass: "conditions",
           studentTone: "conditional",
-          studentAnswer: "Yes — only eligible students aged 13+ in Years 5–12 under teacher direction.",
+          studentAnswer: "Yes. Eligible students aged 13 or older in Years 5–12 may use it under teacher direction.",
           ageValue: "13+",
           ageNote: "Students using it directly",
-          features: "Web-grounded conversational assistance for research, drafting, summarising, image generation and—where enabled—file analysis.",
+          features: "Web-grounded help with research, drafting, summarising and image generation. File analysis may also be available.",
           suitable: [
             "Staff drafting, planning and web-grounded research using an Emmanuel account.",
             "Guided Years 5–12 student use when access has been enabled and the student is 13+.",
@@ -1384,7 +1490,7 @@
           ],
           accountScope: "Emmanuel Microsoft Entra account with enterprise data protection",
           ageRule: "13+ for direct student use; Years 5–12 College scope",
-          scopeNote: "This decision applies only to signed-in Emmanuel accounts with enterprise data protection. Personal Microsoft Copilot use is a different configuration."
+          scopeNote: "Use a signed-in Emmanuel account with enterprise data protection. Personal Microsoft Copilot is not covered here."
         },
         {
           id: "google-search-ai",
@@ -1393,7 +1499,7 @@
           approval: "Use with conditions",
           approvalClass: "conditions",
           studentTone: "conditional",
-          studentAnswer: "Yes — Years 5–12 under teacher direction; P–4 is teacher-mediated.",
+          studentAnswer: "Yes. Years 5–12 may use it under teacher direction. P–4 use is teacher-mediated.",
           ageValue: "No sign-in",
           ageNote: "For standard text-based use",
           features: "AI-assisted Google Search through AI Overviews and AI Mode, including generated summaries, linked web sources, topic exploration and follow-up questions.",
@@ -1420,7 +1526,7 @@
           accountScope: "Unsigned public Google Search; AI Overviews and standard AI Mode; text queries only",
           ageRule: "No separate account or sign-in required for the approved text-based use",
           reviewed: "6 August 2026",
-          scopeNote: "This decision does not cover signed-in history or personalisation, Personal Intelligence, file or image uploads, Search Labs experiments, the Gemini app or other Google AI products. Those configurations require separate consideration."
+          scopeNote: "This entry does not cover signed-in history or personalisation, Personal Intelligence, uploads, Search Labs experiments, the Gemini app or other Google AI products."
         },
         {
           id: "google-gemini-consumer",
@@ -1429,9 +1535,9 @@
           approval: "Staff only",
           approvalClass: "staff",
           studentTone: "blocked",
-          studentAnswer: "No — direct consumer Gemini use has not been approved for students.",
+          studentAnswer: "No. Consumer Gemini has not been approved for direct student use.",
           ageValue: "13+*",
-          ageNote: "*Provider minimum; College scope is adult staff only",
+          ageNote: "*The service allows 13+; Emmanuel permits adult staff only",
           features: "General-purpose generative AI for research, web-grounded questions, brainstorming, drafting, summarising, coding and content generation. Some web features can be used without signing in.",
           suitable: [
             "Adult staff planning, brainstorming and drafting with public, generic or fully de-identified information.",
@@ -1447,7 +1553,7 @@
           conditions: [
             "Use signed-out access where it provides the required feature, or turn off Keep Activity and use Temporary Chat when signed in.",
             "Use only public, generic, invented or fully de-identified material.",
-            "Open and check cited sources, and independently verify accuracy, currency, copyright and suitability before use."
+            "Open the cited sources and check accuracy, currency, copyright and suitability before use."
           ],
           reasons: [
             "Google permits personal and eligible school-account access from age 13 in Australia, but provider eligibility is not the same as College approval.",
@@ -1456,11 +1562,51 @@
             "When used signed out, Google may still collect usage, technical and safety data, although it is not associated with a specific Google Account.",
             "A Google account created with an Emmanuel email address remains a consumer account unless it is part of a separately administered Google Workspace environment."
           ],
-          keyCondition: "Adult staff only. Use signed out or turn off Keep Activity, enter no personal information and independently check every output.",
+          keyCondition: "Adult staff only. Use signed out or turn off Keep Activity, enter no personal information and check every output yourself.",
           accountScope: "Consumer Gemini web experience used by adult staff; signed-out access or a personal Google account with Keep Activity off",
-          ageRule: "Provider minimum is 13+ for personal or eligible school accounts in Australia; Emmanuel scope remains adult staff only",
+          ageRule: "The service allows eligible users aged 13+ in Australia; Emmanuel permits adult staff only",
           reviewed: "6 August 2026",
-          scopeNote: "Using an Emmanuel email address to create a personal Google account does not make it College-managed. This decision excludes student use, connected apps, uploads, personalisation, Google Workspace for Education and any contracted enterprise configuration; each would require a separate assessment."
+          scopeNote: "An Emmanuel email address does not make a personal Google account College managed. Student use, connected apps, uploads, personalisation and Google Workspace for Education are not covered here."
+        },
+        {
+          id: "grok-consumer",
+          title: "Grok",
+          accountType: "Consumer Grok.com account · adult staff · text chat and search",
+          approval: "Staff only",
+          approvalClass: "staff",
+          studentTone: "blocked",
+          studentAnswer: "No. Consumer Grok is not approved for direct student use.",
+          ageValue: "13+*",
+          ageNote: "*The service allows 13+ with guardian permission; Emmanuel permits adult staff only",
+          features: "xAI’s general-purpose assistant for web and X-grounded research, questions, brainstorming, drafting, summarising and coding. The approved scope is text-based chat and search at Grok.com only.",
+          suitable: [
+            "Adult staff brainstorming, planning and drafting with public, generic, invented or fully de-identified information.",
+            "Finding possible sources or current perspectives for subsequent checking against authoritative material.",
+            "Teacher-led demonstrations using pre-checked prompts and outputs, without student accounts or student information."
+          ],
+          avoid: [
+            "Directing students to use Grok or create consumer xAI or X accounts for College work.",
+            "Entering names, student work, results, correspondence, sensitive information or confidential College material.",
+            "Uploading files, images, audio or video, using companion or adult-oriented modes, or generating media under this approval.",
+            "Using Grok through X, connecting X history for personalisation, or treating generated claims and citations as verified."
+          ],
+          conditions: [
+            "Use Grok.com as an adult staff member and turn off ‘Improve the Model’, or use Private Chat.",
+            "Keep X personalisation off and enable the setting that limits exposure to 18+ media; do not connect or import an X profile or conversation history.",
+            "Use only public, generic, invented or fully de-identified inputs.",
+            "Open the original sources and check accuracy, currency, bias, copyright and classroom suitability before use."
+          ],
+          reasons: [
+            "xAI permits users aged 13–17 only with parent or guardian permission, but provider eligibility is not College approval.",
+            "xAI warns that Grok can produce coarse language, crude humour, sexual situations or violence depending on the selected features and prompts.",
+            "Consumer prompts, interactions and responses may be used for model training unless the user opts out or uses Private Chat.",
+            "Grok can draw on public X posts and live web results, which can be current but are not necessarily authoritative or suitable for students."
+          ],
+          keyCondition: "Adult staff only at Grok.com. Turn off model improvement or use Private Chat, enter no personal information and check every output yourself.",
+          accountScope: "Consumer Grok.com account used by adult staff; text chat and search only",
+          ageRule: "The service allows users aged 13–17 with parent or guardian agreement; Emmanuel permits adult staff only",
+          reviewed: "24 August 2026",
+          scopeNote: "This entry does not cover student use, Grok inside X, X personalisation, companion or adult-oriented modes, uploads, voice, media generation, APIs, Build or enterprise accounts."
         },
         {
           id: "canva-education",
@@ -1469,7 +1615,7 @@
           approval: "Use with conditions",
           approvalClass: "conditions",
           studentTone: "conditional",
-          studentAnswer: "Yes — Years 5–12 in Canva Education; P–4 remains teacher-mediated.",
+          studentAnswer: "Yes. Years 5–12 may use Canva Education. P–4 use is teacher-mediated.",
           ageValue: "13+*",
           ageNote: "*All ages in Canva Education with teacher supervision",
           features: "Creates and edits presentations, graphics, images, video, websites and learning resources using design and generative-AI features.",
@@ -1504,7 +1650,7 @@
           approval: "Use with conditions",
           approvalClass: "conditions",
           studentTone: "conditional",
-          studentAnswer: "Yes — Years 5–12 through the Education product; P–4 is teacher-mediated.",
+          studentAnswer: "Yes. Years 5–12 may use the Education product. P–4 use is teacher-mediated.",
           ageValue: "K–12",
           ageNote: "Education product access",
           features: "Creates graphics, presentations, webpages, video, audio and generative images in a K–12 classroom environment.",
@@ -1530,7 +1676,7 @@
           ],
           accountScope: "Adobe Express for Education; educator-created or IT-provisioned access",
           ageRule: "K–12 access through the Education product",
-          scopeNote: "This decision applies to Adobe Express for Education. Personal Adobe accounts and other Adobe generative-AI products require their own assessment."
+          scopeNote: "This entry applies to Adobe Express for Education. Personal Adobe accounts and other Adobe AI products need their own review."
         },
         {
           id: "notebooklm",
@@ -1539,7 +1685,7 @@
           approval: "Staff only",
           approvalClass: "staff",
           studentTone: "blocked",
-          studentAnswer: "No — the assessed account is not a College-managed education environment.",
+          studentAnswer: "No. The account reviewed is not part of a College-managed education environment.",
           ageValue: "13+",
           ageNote: "Personal Google account in Australia",
           features: "Creates source-grounded summaries, questions, study guides, audio overviews, research notebooks and cited responses from uploaded material.",
@@ -1565,7 +1711,7 @@
           ],
           accountScope: "Personal or non-College Google account used by adult staff",
           ageRule: "13+ for a self-managed personal Google account in Australia; College scope remains staff only",
-          scopeNote: "NotebookLM through a College-managed Workspace for Education account would be a materially different configuration and requires a separate College decision."
+          scopeNote: "NotebookLM through a College-managed Workspace for Education account would need a separate review."
         },
         {
           id: "magicschool",
@@ -1574,7 +1720,7 @@
           approval: "Staff only",
           approvalClass: "staff",
           studentTone: "blocked",
-          studentAnswer: "No — MagicStudent rooms and student accounts are outside this approval.",
+          studentAnswer: "No. MagicStudent rooms and student accounts are not covered by this entry.",
           ageValue: "Adult",
           ageNote: "Educator account holder",
           features: "Teacher-facing lesson planning, differentiation, text adaptation, resource creation, rubrics and generic communication drafting.",
@@ -1609,7 +1755,7 @@
           approval: "Staff only",
           approvalClass: "staff",
           studentTone: "blocked",
-          studentAnswer: "Not yet — a supervised Years 9–12 pathway is being reviewed.",
+          studentAnswer: "Not yet. A supervised Years 9–12 pathway is being reviewed.",
           ageValue: "13+",
           ageNote: "Under 18: parent or guardian consent",
           features: "AI-assisted web and academic search with cited answers, source links, summaries and conversational follow-up.",
@@ -1646,7 +1792,7 @@
           approval: "Not permitted",
           approvalClass: "not-approved",
           studentTone: "blocked",
-          studentAnswer: "No — staff and students must not use it for College work.",
+          studentAnswer: "No. Staff and students must not use it for College work.",
           ageValue: "Under 18*",
           ageNote: "*Only with parent or guardian supervision",
           features: "Academic-paper search, PDF summarisation, article question-answering, literature-review assistance, data extraction and citation generation.",
@@ -1671,7 +1817,7 @@
           ],
           accountScope: "Consumer SciSpace/Typeset service, including PDF upload and citation features",
           ageRule: "Users under 18 require parent or guardian supervision",
-          scopeNote: "This is a failed-gate decision, not a judgment that every possible institutional SciSpace arrangement is unsafe. A materially different configuration may be submitted for review."
+          scopeNote: "This entry reflects the version reviewed. A school-managed SciSpace arrangement may be submitted for a new review."
         },
         {
           id: "semantic-scholar",
@@ -1680,7 +1826,7 @@
           approval: "Staff only",
           approvalClass: "staff",
           studentTone: "blocked",
-          studentAnswer: "No — the service terms require users to be 18 or older.",
+          studentAnswer: "No. The service terms require users to be 18 or older.",
           ageValue: "18+",
           ageNote: "Required by the service terms",
           features: "Scholarly-paper search, citation networks, related-paper discovery, TLDR summaries, research feeds and citation export.",
@@ -1706,7 +1852,7 @@
           ],
           accountScope: "Public Semantic Scholar website used by adult staff without an account",
           ageRule: "Users must be 18 or older under the provider’s current terms",
-          scopeNote: "Staff may provide students with independently selected paper links or checked results; students must not use Semantic Scholar directly under this decision."
+          scopeNote: "Staff may give students paper links or checked results they have selected. Students must not use Semantic Scholar directly."
         },
         {
           id: "consensus",
@@ -1715,7 +1861,7 @@
           approval: "Staff only",
           approvalClass: "staff",
           studentTone: "blocked",
-          studentAnswer: "No — consumer use by minors requires guardian acceptance.",
+          studentAnswer: "No. Consumer use by minors requires guardian acceptance.",
           ageValue: "13+",
           ageNote: "Guardian accepts terms for minors",
           features: "AI-assisted scholarly search, evidence synthesis, cited summaries, study details, Consensus Meter and article question-answering.",
@@ -1750,7 +1896,7 @@
           approval: "Staff only",
           approvalClass: "staff",
           studentTone: "blocked",
-          studentAnswer: "No — no College student licence or managed configuration was assessed.",
+          studentAnswer: "No. No College student licence or managed version was reviewed.",
           ageValue: "13+*",
           ageNote: "*Minors require guardian consent",
           features: "Computational answers, step-by-step mathematics, graphing, units, scientific data, statistics and factual knowledge queries.",
@@ -1786,7 +1932,7 @@
           approvalClass: "not-approved",
           directoryRule: true,
           studentTone: "blocked",
-          studentAnswer: "No — an unlisted tool has not been approved for staff or student use.",
+          studentAnswer: "No. An unlisted tool has not been approved for staff or student use.",
           features: "Do not use or recommend an AI product, embedded feature, browser extension or account configuration unless it has its own published entry in this directory.",
           suitable: [
             "Check that the exact tool and account type are listed.",
@@ -1799,7 +1945,7 @@
           ],
           conditions: [
             "Submit the product name, account type, intended users and intended use.",
-            "Wait for a published decision covering the exact configuration.",
+            "Wait until the exact version and account type appear in this directory.",
             "Re-submit a listed tool when a different tier, account or feature is proposed."
           ],
           reasons: [
@@ -1821,8 +1967,44 @@
 
       const renderList = (items) => items.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
 
+      const staffPermissionOverrides = {
+        "semantic-scholar": { label: "Allowed", tone: "allowed" }
+      };
+
+      const directStudentNotes = {
+        "microsoft-copilot-chat": "Eligible students aged 13+ in Years 5–12",
+        "google-search-ai": "Years 5–12. P–4 is teacher-operated.",
+        "canva-education": "Years 5–12. P–4 is teacher-operated.",
+        "adobe-express-education": "Years 5–12. P–4 is teacher-operated."
+      };
+
+      const getStaffPermission = (tool) => {
+        if (staffPermissionOverrides[tool.id]) return staffPermissionOverrides[tool.id];
+        if (tool.approval === "Permitted") return { label: "Allowed", tone: "allowed" };
+        if (tool.approval === "Not permitted") return { label: "Not allowed", tone: "not-allowed" };
+        return { label: "Allowed with conditions", tone: "conditions" };
+      };
+
+      const getStudentPermission = (tool) => {
+        if (tool.approval === "Not permitted") {
+          return { label: "Not allowed", tone: "not-allowed", note: "" };
+        }
+
+        if (tool.studentTone === "conditional") {
+          return {
+            label: "Direct with teacher direction",
+            tone: "direct",
+            note: directStudentNotes[tool.id] || "Teacher direction required"
+          };
+        }
+
+        return { label: "Teacher-operated only", tone: "mediated", note: "" };
+      };
+
       const renderTool = (tool) => {
         const isDirectoryRule = Boolean(tool.directoryRule);
+        const staffPermission = getStaffPermission(tool);
+        const studentPermission = getStudentPermission(tool);
         const keyCondition = tool.keyCondition || (tool.approval === "Not permitted"
           ? (isDirectoryRule
             ? "Do not use an unlisted AI tool. Submit it for review and wait for a published decision."
@@ -1831,7 +2013,9 @@
         const searchTerms = [
           tool.title,
           tool.accountType,
-          tool.approval,
+          staffPermission.label,
+          studentPermission.label,
+          studentPermission.note,
           tool.studentAnswer,
           tool.ageValue,
           tool.ageNote,
@@ -1843,7 +2027,7 @@
         ].join(" ");
 
         return `
-          <article class="tool-record" data-search="${escapeHtml(searchTerms)}" data-key-condition="${escapeHtml(keyCondition)}">
+          <article class="tool-record"${isDirectoryRule ? " data-directory-rule=\"true\"" : ""} data-search="${escapeHtml(searchTerms)}" data-key-condition="${escapeHtml(keyCondition)}">
             <div class="decision-bar${isDirectoryRule ? " directory-rule" : ""}">
               <div class="tool-identity">
                 <p class="micro-label">${isDirectoryRule ? "Directory rule" : "Tool and account type"}</p>
@@ -1851,13 +2035,15 @@
                 <p class="account-type">${escapeHtml(tool.accountType)}</p>
               </div>
 
-              <div class="approval-cell ${escapeHtml(tool.approvalClass)}">
-                <div class="approval-value">${escapeHtml(tool.approval)}</div>
+              <div class="permission-cell staff-permission ${escapeHtml(staffPermission.tone)}">
+                <p class="micro-label">Staff use</p>
+                <div class="permission-value">${escapeHtml(staffPermission.label)}</div>
               </div>
 
-              <div class="student-cell ${escapeHtml(tool.studentTone)}">
-                <p class="micro-label">Can students use it directly?</p>
-                <p class="student-answer">${escapeHtml(tool.studentAnswer)}</p>
+              <div class="permission-cell student-permission ${escapeHtml(studentPermission.tone)}">
+                <p class="micro-label">Student use</p>
+                <div class="permission-value">${escapeHtml(studentPermission.label)}</div>
+                ${studentPermission.note ? `<p class="permission-note">${escapeHtml(studentPermission.note)}</p>` : ""}
               </div>
 
               ${isDirectoryRule ? "" : `<div class="age-cell">
@@ -1915,7 +2101,7 @@
 
             <dl class="record-footer${isDirectoryRule ? " directory-footer" : ""}">
               <div class="fact">
-                <dt>${isDirectoryRule ? "This rule covers" : "Account scope"}</dt>
+                <dt>${isDirectoryRule ? "This rule covers" : "Account covered"}</dt>
                 <dd>${escapeHtml(tool.accountScope)}</dd>
               </div>
               ${isDirectoryRule ? "" : `<div class="fact">
@@ -1928,13 +2114,29 @@
               </div>
             </dl>
 
-            <p class="scope-note"><strong>${isDirectoryRule ? "Directory rule:" : "Scope matters:"}</strong> ${escapeHtml(tool.scopeNote)}</p>
+            <p class="scope-note"><strong>${isDirectoryRule ? "Directory rule:" : "Please note:"}</strong> ${escapeHtml(tool.scopeNote)}</p>
           </article>
         `;
       };
 
       const insertionPoint = document.querySelector("#no-results");
       insertionPoint.insertAdjacentHTML("beforebegin", additionalTools.map(renderTool).join(""));
+
+      const directory = document.querySelector(".directory");
+      const directoryRecords = [...document.querySelectorAll(".tool-record")];
+
+      directoryRecords
+        .sort((a, b) => {
+          const aIsRule = a.dataset.directoryRule === "true";
+          const bIsRule = b.dataset.directoryRule === "true";
+
+          if (aIsRule !== bIsRule) return aIsRule ? 1 : -1;
+
+          const aName = a.querySelector(".tool-identity h2")?.textContent.trim() || "";
+          const bName = b.querySelector(".tool-identity h2")?.textContent.trim() || "";
+          return aName.localeCompare(bName, "en-AU", { sensitivity: "base" });
+        })
+        .forEach((record) => directory.insertBefore(record, insertionPoint));
 
       const directChild = (record, selector) => Array.from(record.children)
         .find((child) => child.matches(selector));
@@ -1953,7 +2155,7 @@
 
         const keyLabel = document.createElement("p");
         keyLabel.className = "micro-label";
-        keyLabel.textContent = "Key condition";
+        keyLabel.textContent = "Before you use it";
 
         const keyText = document.createElement("p");
         keyText.textContent = record.dataset.keyCondition || "Read the conditions before using this tool.";
@@ -1999,18 +2201,22 @@
 
       const filterRecords = () => {
         const query = normalise(search.value);
-        let visible = 0;
+        let visibleTools = 0;
+        let visibleRecords = 0;
 
         records.forEach((record) => {
           const haystack = normalise(`${record.dataset.search} ${record.textContent}`);
           const match = !query || haystack.includes(query);
           record.hidden = !match;
-          if (match) visible += 1;
+          if (match) {
+            visibleRecords += 1;
+            if (record.dataset.directoryRule !== "true") visibleTools += 1;
+          }
         });
 
-        count.textContent = String(visible);
-        countLabel.textContent = visible === 1 ? "tool shown" : "tools shown";
-        noResults.style.display = visible ? "none" : "block";
+        count.textContent = String(visibleTools);
+        countLabel.textContent = visibleTools === 1 ? "tool shown" : "tools shown";
+        noResults.style.display = visibleRecords ? "none" : "block";
         clear.style.display = query ? "block" : "none";
       };
 
